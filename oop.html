@@ -1,0 +1,121 @@
+<html>
+<head> <title> OOP </title> </head>
+<body>
+<h1> OOP </h1>
+<h2>
+<div id = "demo1"></div>
+<div id = "demo2"></div>
+<div id = "demo3"></div>
+<div id = "demo4"></div>
+<div id = "demo5"></div>
+<div id = "demo6"></div>
+</h2>
+
+<script>
+
+//A class represents an entity that has attributes and operations.
+class Person{
+
+  //constructor is a special method of the class.
+  //It auto executes as object of the class is created.
+  //It defines the attributes for the object and puts the object into initial state.
+
+  constructor(name, age){
+    //defining attributes of the object
+    this.naam = name;
+    this.umar = age;
+
+  }
+
+
+  //methods define the operations of the entity
+  info(){
+    return this.naam + " is " + this.umar + " years old";
+
+  }
+
+  //properties are of 2 types
+  //setters (mutators)
+  //Update the value of an attribute
+  //Are useful for data hiding
+  //Allow application of business rules before assignment.
+
+  set name(new_name){
+    //business rules on new_name
+    this.naam = new_name;
+  } 
+
+  //getters (accessors)
+  //return value of an attribute
+
+  get name(){
+    return this.naam;
+  }   
+
+  set age(val){
+ 
+    if ( isNaN(val) || val < 0 || val > 90) {
+      this.umar = 0;//logical
+    }
+    else {
+      this.umar = val;   
+    }
+  }
+
+  get age(){
+    return this.umar;
+  }
+
+}
+
+//object of the class
+p1 = new Person("Vikas", 10);
+
+document.getElementById("demo1").innerHTML = p1.info();
+
+p1.name = "Manoj"; //p1.name("Manoj")
+p1.age = "abc";
+p1.age = 1000;
+document.getElementById("demo2").innerHTML = p1.info();
+p1.age = 11;
+document.getElementById("demo3").innerHTML = p1.info();
+
+p2 = new Person("Anita", 15);
+document.getElementById("demo4").innerHTML = p2.info();
+
+
+//By inheritance a derived class is formed.
+//It gets code (operations) and data (attributes) from the super class.
+//It is a host for extended code (operations and data (attributes)
+
+class Dancer extends Person{
+
+  constructor(name, age, danceType){
+    super(name, age); //mandatory, so that the object can be fully constructed
+    this.danceType = danceType;
+
+  }
+
+  //override (sub class redefines  the inherited method, keeping the signature exactly same) info to render danceType as well.
+  info(){
+    //return this.naam + " is " + this.umar + " years old and can perform " + this.danceType;
+    return super.info() + " and can perform " + this.danceType;
+  }  
+
+  //addition methods possible
+  steps(){
+   return "N basic steps in " + this.danceType;
+  }
+
+  //set get property for danceType possible
+   
+}
+
+d = new Dancer("Seema", 5, "BharatNatyam");
+document.getElementById("demo5").innerHTML = d.info();
+document.getElementById("demo6").innerHTML = d.steps();
+ 
+
+</script>
+</body>
+</html>
